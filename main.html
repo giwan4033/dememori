@@ -8,6 +8,22 @@
         <!-- Firebase SDKs -->
         <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+
+        <script>
+          const firebaseConfig = {
+            apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
+            authDomain: "forestfireforecast.firebaseapp.com",
+            databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
+            projectId: "forestfireforecast",
+            storageBucket: "forestfireforecast.appspot.com",
+            messagingSenderId: "566032395610",
+            appId: "1:566032395610:web:835be202cae066a6221763",
+            measurementId: "G-RPDPN7ZZ69"
+          };
+          
+          // Firebase 초기화
+          firebase.initializeApp(firebaseConfig);
+        </script>
     </head>
 <body>
     <header>
@@ -28,53 +44,143 @@
             <h2>Archive</h2>
             <p>Wildfire Warning System with Smart Devices</p>
 
-            <div class="grid">
-                <!-- Grid items here -->
-                <div class="grid-item" data-sensor="sensor1">
-                    <img src="image1.jpg" alt="Sensor 1">
-                    <h3>Sensor 1</h3>
-                    <p>Click to see details</p>
+            <div class="sensor-grid">
+              <!-- Sensor 1 -->
+              <div class="sensor-card">
+                  <div class="sensor-header">
+                      <img src="sensor_icon.png" alt="Sensor 1">
+                      <span>근린공원 방향</span>
+                      <div class="sensor-toggle">off</div>
+                  </div>
+                  <div class="sensor-data">
+                      <div class="sensor-temperature">
+                          <span>🌡</span> <span id="sensor1-temp">data</span>
+                      </div>
+                      <div class="sensor-humidity">
+                          <span>💧</span> <span id="sensor1-humidity">data</span>
+                      </div>
+                  </div>
+
+              </div><div class="sensor-card">
+                <div class="sensor-header">
+                    <img src="sensor_1con.png" alt="Sensor 2">
+                    <span>헬기장 방향</span>
+                    <div class="sensor-toggle">off</div>
                 </div>
-                <div class="grid-item" data-sensor="sensor2">
-                    <img src="image2.jpg" alt="Sensor 2">
-                    <h3>Sensor 2</h3>
-                    <p>Click to see details</p>
+                <div class="sensor-data">
+                    <div class="sensor-temperature">
+                        <span>🌡</span> <span id="sensor2-temp">data</span>
+                    </div>
+                    <div class="sensor-humidity">
+                        <span>💧</span> <span id="sensor2-humidity">data</span>
+                    </div>
                 </div>
-                <div class="grid-item" data-sensor="sensor3">
-                    <img src="image3.jpg" alt="Sensor 3">
-                    <h3>Sensor 3</h3>
-                    <p>Click to see details</p>
+            </div>
+            <div class="sensor-card">
+              <div class="sensor-header">
+                  <img src="sensor_icon.png" alt="Sensor 3">
+                  <span>주공 5단지 방향</span>
+                  <div class="sensor-toggle">off</div>
+              </div>
+              <div class="sensor-data">
+                  <div class="sensor-temperature">
+                      <span>🌡</span> <span id="sensor3-temp">data</span>
+                  </div>
+                  <div class="sensor-humidity">
+                      <span>💧</span> <span id="sensor3-humidity">data</span>
+                  </div>
+              </div>
+          </div>
+          <div class="sensor-card">
+            <div class="sensor-header">
+                <img src="sensor_icon.png" alt="Sensor 4">
+                <span>약수터 방향</span>
+                <div class="sensor-toggle">off</div>
+            </div>
+            <div class="sensor-data">
+                <div class="sensor-temperature">
+                    <span>🌡</span> <span id="sensor4-temp">data</span>
                 </div>
-                <div class="grid-item" data-sensor="sensor4">
-                    <img src="image4.jpg" alt="Sensor 4">
-                    <h3>Sensor 4</h3>
-                    <p>Click to see details</p>
+                <div class="sensor-humidity">
+                    <span>💧</span> <span id="sensor4-humidity">data</span>
                 </div>
-                <div class="grid-item" data-sensor="sensor5">
-                    <img src="image5.jpg" alt="Sensor 5">
-                    <h3>Sensor 5</h3>
-                    <p>Click to see details</p>
-                </div>
-                <div class="grid-item" data-sensor="sensor6">
-                    <img src="image6.jpg" alt="Sensor 6">
-                    <h3>Sensor 6</h3>
-                    <p>Click to see details</p>
-                </div>
-                <div class="grid-item" data-sensor="sensor7">
-                    <img src="image7.jpg" alt="Sensor 7">
-                    <h3>Sensor 7</h3>
-                    <p>Click to see details</p>
-                </div>
-                <div class="grid-item" data-sensor="sensor8">
-                    <img src="image8.jpg" alt="Sensor 8">
-                    <h3>Sensor 8</h3>
-                    <p>Click to see details</p>
-                </div>
-                <div class="grid-item" data-sensor="sensor9">
-                    <img src="image9.jpg" alt="Sensor 9">
-                    <h3>Sensor 9</h3>
-                    <p>Click to see details</p>
-                </div>
+            </div>
+        </div>
+        <div class="sensor-card">
+          <div class="sensor-header">
+              <img src="sensor_icon.png" alt="Sensor 5">
+              <span>경복대 방향</span>
+              <div class="sensor-toggle">off</div>
+          </div>
+          <div class="sensor-data">
+              <div class="sensor-temperature">
+                  <span>🌡</span> <span id="sensor5-temp">data</span>
+              </div>
+              <div class="sensor-humidity">
+                  <span>💧</span> <span id="sensor5-humidity">data</span>
+              </div>
+          </div>
+      </div>
+      <div class="sensor-card">
+        <div class="sensor-header">
+            <img src="sensor_icon.png" alt="Sensor 6">
+            <span>배드민턴장 방향</span>
+            <div class="sensor-toggle">off</div>
+        </div>
+        <div class="sensor-data">
+            <div class="sensor-temperature">
+                <span>🌡</span> <span id="sensor6-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+                <span>💧</span> <span id="sensor6-humidity">data</span>
+            </div>
+        </div>
+    </div>
+    <div class="sensor-card">
+      <div class="sensor-header">
+          <img src="sensor_icon.png" alt="Sensor 7">
+          <span>경복대 방향</span>
+          <div class="sensor-toggle">off</div>
+      </div>
+      <div class="sensor-data">
+          <div class="sensor-temperature">
+              <span>🌡</span> <span id="sensor7-temp">data</span>
+          </div>
+          <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor7-humidity">data</span>
+          </div>
+      </div>
+  </div>
+  <div class="sensor-card">
+    <div class="sensor-header">
+        <img src="sensor_icon.png" alt="Sensor 8">
+        <span>경복대 방향</span>
+        <div class="sensor-toggle">off</div>
+    </div>
+    <div class="sensor-data">
+        <div class="sensor-temperature">
+            <span>🌡</span> <span id="sensor8-temp">data</span>
+        </div>
+        <div class="sensor-humidity">
+            <span>💧</span> <span id="sensor8-humidity">data</span>
+        </div>
+    </div>
+</div>
+<div class="sensor-card">
+  <div class="sensor-header">
+      <img src="sensor_icon.png" alt="Sensor 9">
+      <span>경복대 방향</span>
+      <div class="sensor-toggle">off</div>
+  </div>
+  <div class="sensor-data">
+      <div class="sensor-temperature">
+          <span>🌡</span> <span id="sensor9-temp">data</span>
+      </div>
+      <div class="sensor-humidity">
+          <span>💧</span> <span id="sensor9-humidity">data</span>
+      </div>
+  </div>
+</div>
             </div>
         </div>
     </section>

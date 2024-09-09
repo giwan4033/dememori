@@ -1,38 +1,46 @@
 // Firebase 구성 객체 (Firebase 콘솔에서 복사한 내용으로 교체하세요)
+if (!firebase.apps.length) {
 const firebaseConfig = {
-    apiKey: "AIzaSyBJNLBY2X1CwZrJVKCLbv26GTOqwP9Nx9k",
-    authDomain: "capstone-44da8.firebaseapp.com",
-    databaseURL: "https://capstone-44da8-default-rtdb.firebaseio.com",
-    projectId: "capstone-44da8",
-    storageBucket: "capstone-44da8.appspot.com",
-    messagingSenderId: "413756607044",
-    appId: "1:413756607044:web:79f60604f3d8e3cf8b0a11",
-    measurementId: "G-XVJYCXTY7T"
-  };
+  apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
+  authDomain: "forestfireforecast.firebaseapp.com",
+  databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
+  projectId: "forestfireforecast",
+  storageBucket: "forestfireforecast.appspot.com",
+  messagingSenderId: "566032395610",
+  appId: "1:566032395610:web:835be202cae066a6221763",
+  measurementId: "G-RPDPN7ZZ69"
+};
 
 // Firebase 초기화
 firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
+}
 
-// Firebase 데이터베이스 참조
+// Realtime Database 초기화
 const database = firebase.database();
 
-// 센서 1의 데이터 가져오기
-const sensor1Ref = database.ref('sensors/sensor1'); // 경로를 실제 Firebase 데이터 경로로 변경
+// 특정 센서 경로에서 온도 및 습도 데이터를 가져오는 함수
+function getSensorData(sensorId, tempElementId, humidityElementId) {
+    const sensorRef = database.ref(`sensor/${sensorId}`);
 
-sensor1Ref.on('value', (snapshot) => {
-    const data = snapshot.val();
-    
-    // 데이터가 없을 때 대비
-    if (!data) {
-        console.log('데이터를 가져올 수 없습니다.');
-        document.querySelector('.grid-item[data-sensor="sensor1"] p').textContent = '데이터를 가져올 수 없습니다.';
-        return;
-    }
+    // 실시간으로 데이터 업데이트 감지
+    sensorRef.on('value', (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+            document.getElementById(tempElementId).textContent = data.temperature + '°C';
+            document.getElementById(humidityElementId).textContent = data.humidity + '%';
+        }
+    });
+}
 
-    // 온도와 습도 데이터 가져오기
-    const temperature = data.temperature || '데이터 없음';
-    const humidity = data.humidity || '데이터 없음';
-
-    // 센서 1의 데이터를 HTML에 표시하기
-    document.querySelector('.grid-item[data-sensor="sensor1"] p').textContent = `온도: ${temperature}°C, 습도: ${humidity}%`;
-});
+// 각각의 센서 데이터를 가져오기
+getSensorData('sensor1', 'sensor1-temp', 'sensor1-humidity'); // 근린공원 방향
+getSensorData('sensor2', 'sensor2-temp', 'sensor2-humidity'); // 헬기장 방향
+getSensorData('sensor3', 'sensor3-temp', 'sensor3-humidity'); // 주공 5단지 방향
+getSensorData('sensor4', 'sensor4-temp', 'sensor4-humidity'); // 약수터 방향
+getSensorData('sensor5', 'sensor5-temp', 'sensor5-humidity'); // 경복대 방향
+getSensorData('sensor6', 'sensor6-temp', 'sensor6-humidity'); // 배드민턴장 방향
+getSensorData('sensor7', 'sensor7-temp', 'sensor7-humidity'); // 경복대 방향
+getSensorData('sensor8', 'sensor8-temp', 'sensor8-humidity'); // 경복대 방향
+getSensorData('sensor9', 'sensor9-temp', 'sensor9-humidity'); // 경복대 방향
