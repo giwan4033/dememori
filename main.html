@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -8,65 +8,6 @@
     <!-- Firebase 8 SDK로 변경 -->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
-
-    <script>
-      const firebaseConfig = {
-        apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
-        authDomain: "forestfireforecast.firebaseapp.com",
-        databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
-        projectId: "forestfireforecast",
-        storageBucket: "forestfireforecast.appspot.com",
-        messagingSenderId: "566032395610",
-        appId: "1:566032395610:web:835be202cae066a6221763",
-        measurementId: "G-RPDPN7ZZ69",
-      };
-
-      // Firebase 초기화
-      if (!firebase.apps.length) {
-        firebase.initializeApp(firebaseConfig);
-      } else {
-        firebase.app();
-      }
-
-      const database = firebase.database();
-
-      // 최신 데이터를 가져와서 화면에 표시하는 함수
-      function getLatestSensorData() {
-        const humidityRef = database
-          .ref("sensor/humidity")
-          .orderByKey()
-          .limitToLast(1);
-        const temperatureRef = database
-          .ref("sensor/temperature")
-          .orderByKey()
-          .limitToLast(1);
-
-        // 최신 humidity 값 가져오기
-        humidityRef.once("value", (snapshot) => {
-          const latestHumidityData = snapshot.val();
-          console.log("Humidity Data:", latestHumidityData); // 콘솔에 데이터 출력
-          const latestHumidityValue = latestHumidityData
-            ? Object.values(latestHumidityData)[0]
-            : "No Data";
-          document.getElementById("sensor1-humidity").textContent =
-            latestHumidityValue + "%";
-        });
-
-        // 최신 temperature 값 가져오기
-        temperatureRef.once("value", (snapshot) => {
-          const latestTemperatureData = snapshot.val();
-          console.log("Temperature Data:", latestTemperatureData); // 콘솔에 데이터 출력
-          const latestTemperatureValue = latestTemperatureData
-            ? Object.values(latestTemperatureData)[0]
-            : "No Data";
-          document.getElementById("sensor1-temp").textContent =
-            latestTemperatureValue + "°C";
-        });
-      }
-
-      // 함수 호출
-      window.onload = getLatestSensorData;
-    </script>
   </head>
   <body>
     <header>
@@ -91,7 +32,7 @@
           <!-- Sensor 1 -->
           <div class="sensor-card">
             <div class="sensor-header">
-              <img src="sensor_icon.png" alt="Sensor 1" />
+              <img src="sensor_icon.png" alt="Sensor1" />
               <span>근린공원 방향</span>
               <div class="sensor-toggle">off</div>
             </div>
@@ -107,7 +48,7 @@
         </div>
       </div>
     </section>
-    <!-- 
-    <script src="script.js"></script> -->
+
+    <script src="script.js"></script>
   </body>
 </html>

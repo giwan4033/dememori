@@ -1,40 +1,60 @@
 // Firebase 구성 객체 (Firebase 콘솔에서 복사한 내용으로 교체하세요)
-if (!firebase.apps.length) {
-  const firebaseConfig = {
-    apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
-    authDomain: "forestfireforecast.firebaseapp.com",
-    databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
-    projectId: "forestfireforecast",
-    storageBucket: "forestfireforecast.appspot.com",
-    messagingSenderId: "566032395610",
-    appId: "1:566032395610:web:835be202cae066a6221763",
-    measurementId: "G-RPDPN7ZZ69",
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
+  authDomain: "forestfireforecast.firebaseapp.com",
+  databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
+  projectId: "forestfireforecast",
+  storageBucket: "forestfireforecast.appspot.com",
+  messagingSenderId: "566032395610",
+  appId: "1:566032395610:web:835be202cae066a6221763",
+  measurementId: "G-RPDPN7ZZ69",
+};
 
-  // Firebase 초기화
+// Firebase 초기화
+if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
   firebase.app();
 }
 
-// Realtime Database 초기화
 const database = firebase.database();
 
-// 특정 센서 경로에서 온도 및 습도 데이터를 가져오는 함수
-function getSensorData(sensorId, tempElementId, humidityElementId) {
-  const sensorRef = database.ref(`sensor/${sensorId}`);
+// 최신 데이터를 가져와서 화면에 표시하는 함수
+function getLatestSensorData() {
+  const humidityRef = database
+    .ref("sensor/humidity")
+    .orderByKey()
+    .limitToLast(1);
+  const temperatureRef = database
+    .ref("sensor/temperature")
+    .orderByKey()
+    .limitToLast(1);
 
-  // 실시간으로 데이터 업데이트 감지
-  sensorRef.on("value", (snapshot) => {
-    const data = snapshot.val();
-    if (data) {
-      document.getElementById(tempElementId).textContent =
-        data.temperature + "°C";
-      document.getElementById(humidityElementId).textContent =
-        data.humidity + "%";
-    }
+  // 최신 humidity 값 가져오기
+  humidityRef.on("value", (snapshot) => {
+    const latestHumidityData = snapshot.val();
+    console.log("Humidity Data:", latestHumidityData); // 콘솔에 데이터 출력
+    const latestHumidityValue = latestHumidityData
+      ? Object.values(latestHumidityData)[0]
+      : "No Data";
+    document.getElementById("sensor1-humidity").textContent =
+      latestHumidityValue + "%";
+  });
+
+  // 최신 temperature 값 가져오기
+  temperatureRef.on("value", (snapshot) => {
+    const latestTemperatureData = snapshot.val();
+    console.log("Temperature Data:", latestTemperatureData); // 콘솔에 데이터 출력
+    const latestTemperatureValue = latestTemperatureData
+      ? Object.values(latestTemperatureData)[0]
+      : "No Data";
+    document.getElementById("sensor1-temp").textContent =
+      latestTemperatureValue + "°C";
   });
 }
+
+// 함수 호출
+window.onload = getLatestSensorData;
 
 // 각각의 센서 데이터를 가져오기
 getSensorData("sensor1", "sensor1-temp", "sensor1-humidity"); // 근린공원 방향
