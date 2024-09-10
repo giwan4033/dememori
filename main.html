@@ -1,190 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Dememori</title>
-        <link rel="stylesheet" href="styles.css">
-        <!-- Firebase SDKs -->
-        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-app.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.0.0/firebase-database.js"></script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dememori</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Firebase 8 SDK로 변경 -->
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
 
-        <script>
-          const firebaseConfig = {
-            apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
-            authDomain: "forestfireforecast.firebaseapp.com",
-            databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
-            projectId: "forestfireforecast",
-            storageBucket: "forestfireforecast.appspot.com",
-            messagingSenderId: "566032395610",
-            appId: "1:566032395610:web:835be202cae066a6221763",
-            measurementId: "G-RPDPN7ZZ69"
-          };
-          
-          // Firebase 초기화
-          firebase.initializeApp(firebaseConfig);
-        </script>
-    </head>
-<body>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
+        authDomain: "forestfireforecast.firebaseapp.com",
+        databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
+        projectId: "forestfireforecast",
+        storageBucket: "forestfireforecast.appspot.com",
+        messagingSenderId: "566032395610",
+        appId: "1:566032395610:web:835be202cae066a6221763",
+        measurementId: "G-RPDPN7ZZ69",
+      };
+
+      // Firebase 초기화
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      } else {
+        firebase.app();
+      }
+
+      const database = firebase.database();
+
+      // 최신 데이터를 가져와서 화면에 표시하는 함수
+      function getLatestSensorData() {
+        const humidityRef = database
+          .ref("sensor/humidity")
+          .orderByKey()
+          .limitToLast(1);
+        const temperatureRef = database
+          .ref("sensor/temperature")
+          .orderByKey()
+          .limitToLast(1);
+
+        // 최신 humidity 값 가져오기
+        humidityRef.once("value", (snapshot) => {
+          const latestHumidityData = snapshot.val();
+          console.log("Humidity Data:", latestHumidityData); // 콘솔에 데이터 출력
+          const latestHumidityValue = latestHumidityData
+            ? Object.values(latestHumidityData)[0]
+            : "No Data";
+          document.getElementById("sensor1-humidity").textContent =
+            latestHumidityValue + "%";
+        });
+
+        // 최신 temperature 값 가져오기
+        temperatureRef.once("value", (snapshot) => {
+          const latestTemperatureData = snapshot.val();
+          console.log("Temperature Data:", latestTemperatureData); // 콘솔에 데이터 출력
+          const latestTemperatureValue = latestTemperatureData
+            ? Object.values(latestTemperatureData)[0]
+            : "No Data";
+          document.getElementById("sensor1-temp").textContent =
+            latestTemperatureValue + "°C";
+        });
+      }
+
+      // 함수 호출
+      window.onload = getLatestSensorData;
+    </script>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <h1>Dememori</h1>
-            <nav>
-                <ul>
-                    <li><a href="#">Overview</a></li>
-                    <li><a href="#">Archive</a></li>
-                    <li><a href="#">Crew</a></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container">
+        <h1>Dememori</h1>
+        <nav>
+          <ul>
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Archive</a></li>
+            <li><a href="#">Crew</a></li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <section class="archive">
-        <div class="container">
-            <h2>Archive</h2>
-            <p>Wildfire Warning System with Smart Devices</p>
+      <div class="container">
+        <h2>Archive</h2>
+        <p>Wildfire Warning System with Smart Devices</p>
 
-            <div class="sensor-grid">
-              <!-- Sensor 1 -->
-              <div class="sensor-card">
-                  <div class="sensor-header">
-                      <img src="sensor_icon.png" alt="Sensor 1">
-                      <span>근린공원 방향</span>
-                      <div class="sensor-toggle">off</div>
-                  </div>
-                  <div class="sensor-data">
-                      <div class="sensor-temperature">
-                          <span>🌡</span> <span id="sensor1-temp">data</span>
-                      </div>
-                      <div class="sensor-humidity">
-                          <span>💧</span> <span id="sensor1-humidity">data</span>
-                      </div>
-                  </div>
-
-              </div><div class="sensor-card">
-                <div class="sensor-header">
-                    <img src="sensor_1con.png" alt="Sensor 2">
-                    <span>헬기장 방향</span>
-                    <div class="sensor-toggle">off</div>
-                </div>
-                <div class="sensor-data">
-                    <div class="sensor-temperature">
-                        <span>🌡</span> <span id="sensor2-temp">data</span>
-                    </div>
-                    <div class="sensor-humidity">
-                        <span>💧</span> <span id="sensor2-humidity">data</span>
-                    </div>
-                </div>
-            </div>
-            <div class="sensor-card">
-              <div class="sensor-header">
-                  <img src="sensor_icon.png" alt="Sensor 3">
-                  <span>주공 5단지 방향</span>
-                  <div class="sensor-toggle">off</div>
-              </div>
-              <div class="sensor-data">
-                  <div class="sensor-temperature">
-                      <span>🌡</span> <span id="sensor3-temp">data</span>
-                  </div>
-                  <div class="sensor-humidity">
-                      <span>💧</span> <span id="sensor3-humidity">data</span>
-                  </div>
-              </div>
-          </div>
+        <div class="sensor-grid">
+          <!-- Sensor 1 -->
           <div class="sensor-card">
             <div class="sensor-header">
-                <img src="sensor_icon.png" alt="Sensor 4">
-                <span>약수터 방향</span>
-                <div class="sensor-toggle">off</div>
+              <img src="sensor_icon.png" alt="Sensor 1" />
+              <span>근린공원 방향</span>
+              <div class="sensor-toggle">off</div>
             </div>
             <div class="sensor-data">
-                <div class="sensor-temperature">
-                    <span>🌡</span> <span id="sensor4-temp">data</span>
-                </div>
-                <div class="sensor-humidity">
-                    <span>💧</span> <span id="sensor4-humidity">data</span>
-                </div>
-            </div>
-        </div>
-        <div class="sensor-card">
-          <div class="sensor-header">
-              <img src="sensor_icon.png" alt="Sensor 5">
-              <span>경복대 방향</span>
-              <div class="sensor-toggle">off</div>
-          </div>
-          <div class="sensor-data">
               <div class="sensor-temperature">
-                  <span>🌡</span> <span id="sensor5-temp">data</span>
+                <span>🌡</span> <span id="sensor1-temp">data</span>
               </div>
               <div class="sensor-humidity">
-                  <span>💧</span> <span id="sensor5-humidity">data</span>
+                <span>💧</span> <span id="sensor1-humidity">data</span>
               </div>
-          </div>
-      </div>
-      <div class="sensor-card">
-        <div class="sensor-header">
-            <img src="sensor_icon.png" alt="Sensor 6">
-            <span>배드민턴장 방향</span>
-            <div class="sensor-toggle">off</div>
-        </div>
-        <div class="sensor-data">
-            <div class="sensor-temperature">
-                <span>🌡</span> <span id="sensor6-temp">data</span>
             </div>
-            <div class="sensor-humidity">
-                <span>💧</span> <span id="sensor6-humidity">data</span>
-            </div>
-        </div>
-    </div>
-    <div class="sensor-card">
-      <div class="sensor-header">
-          <img src="sensor_icon.png" alt="Sensor 7">
-          <span>경복대 방향</span>
-          <div class="sensor-toggle">off</div>
-      </div>
-      <div class="sensor-data">
-          <div class="sensor-temperature">
-              <span>🌡</span> <span id="sensor7-temp">data</span>
           </div>
-          <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor7-humidity">data</span>
-          </div>
-      </div>
-  </div>
-  <div class="sensor-card">
-    <div class="sensor-header">
-        <img src="sensor_icon.png" alt="Sensor 8">
-        <span>경복대 방향</span>
-        <div class="sensor-toggle">off</div>
-    </div>
-    <div class="sensor-data">
-        <div class="sensor-temperature">
-            <span>🌡</span> <span id="sensor8-temp">data</span>
         </div>
-        <div class="sensor-humidity">
-            <span>💧</span> <span id="sensor8-humidity">data</span>
-        </div>
-    </div>
-</div>
-<div class="sensor-card">
-  <div class="sensor-header">
-      <img src="sensor_icon.png" alt="Sensor 9">
-      <span>경복대 방향</span>
-      <div class="sensor-toggle">off</div>
-  </div>
-  <div class="sensor-data">
-      <div class="sensor-temperature">
-          <span>🌡</span> <span id="sensor9-temp">data</span>
       </div>
-      <div class="sensor-humidity">
-          <span>💧</span> <span id="sensor9-humidity">data</span>
-      </div>
-  </div>
-</div>
-            </div>
-        </div>
     </section>
-
-    <script src="script.js"></script>
-</body>
+    <!-- 
+    <script src="script.js"></script> -->
+  </body>
 </html>
