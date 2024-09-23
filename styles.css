@@ -122,3 +122,18 @@ nav ul li a {
   margin-right: 5px;
   font-size: 22px;
 }
+
+.map-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+#map {
+  width: 90%;
+  max-width: 1000px;
+  height: 500px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

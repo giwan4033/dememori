@@ -8,8 +8,18 @@
     <!-- Firebase 8 SDK로 변경 -->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
+    />
+    <title>간단한 지도 표시하기</title>
+    <script
+      type="text/javascript"
+      src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=paot70w1tj"
+    ></script>
   </head>
-  <!-- paot70w1tj -->
+  <!-- Client ID : paot70w1tj -->
   <body>
     <header>
       <div class="container">
@@ -33,10 +43,26 @@
           <!-- Sensor 1 -->
           <div class="sensor-card">
             <div class="sensor-header">
-              <img src="sensor_icon.png" alt="Sensor1" />
-              <span>근린공원 방향</span>
+              <span>⛰️</span>
+              <span>황금산 </span>
               <div class="sensor-toggle">off</div>
             </div>
+            <div class="map-container">
+              <div id="map" style="width: 90%; height: 200px"></div>
+            </div>
+
+            <script>
+              var map = new naver.maps.Map("map", {
+                center: new naver.maps.LatLng(37.6017967, 127.162256),
+                zoom: 15,
+              });
+
+              var marker = new naver.maps.Marker({
+                position: new naver.maps.LatLng(37.6017967, 127.162256),
+                map: map,
+              });
+            </script>
+
             <div class="sensor-data">
               <div class="sensor-temperature">
                 <span>🌡</span> <span id="sensor1-temp">data</span>
