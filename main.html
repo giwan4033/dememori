@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dememori</title>
     <link rel="stylesheet" href="styles.css" />
-    <!-- Firebase 8 SDK로 변경 -->
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -19,11 +18,10 @@
       src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=paot70w1tj"
     ></script>
   </head>
-  <!-- Client ID : paot70w1tj -->
   <body>
     <header>
       <div class="container">
-        <h1>Dememori</h1>
+        <h1><a href="main.html">Dememori</a></h1>
         <nav>
           <ul>
             <li><a href="#">Overview</a></li>
@@ -35,42 +33,42 @@
     </header>
 
     <section class="archive">
-      <div class="container">
-        <h2>Archive</h2>
-        <p>Wildfire Warning System with Smart Devices</p>
+      <div class="container2">
+        <!-- <h2>Archive</h2>
+        <p>Wildfire Warning System with Smart Devices</p> -->
 
         <div class="sensor-grid">
           <!-- Sensor 1 -->
           <div class="sensor-card">
-            <div class="sensor-header">
-              <span>⛰️</span>
+            <!-- <div class="sensor-header">
+               <span>⛰️</span>
               <span>황금산 </span>
-              <div class="sensor-toggle">off</div>
-            </div>
+              <div class="sensor-toggle">off</div> 
+            </div> -->
             <div class="map-container">
-              <div id="map" style="width: 90%; height: 200px"></div>
+              <div id="map"></div>
             </div>
 
             <script>
-              var map = new naver.maps.Map("map", {
+              var map1 = new naver.maps.Map("map", {
                 center: new naver.maps.LatLng(37.6017967, 127.162256),
                 zoom: 15,
               });
 
-              var marker = new naver.maps.Marker({
+              var marker1 = new naver.maps.Marker({
                 position: new naver.maps.LatLng(37.6017967, 127.162256),
-                map: map,
+                map: map1,
               });
             </script>
 
-            <div class="sensor-data">
+            <!-- <div class="sensor-data">
               <div class="sensor-temperature">
                 <span>🌡</span> <span id="sensor1-temp">data</span>
               </div>
               <div class="sensor-humidity">
                 <span>💧</span> <span id="sensor1-humidity">data</span>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
