@@ -12,7 +12,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
     />
-    <title>간단한 지도 표시하기</title>
+    <title>Dememori - Wildfire Warniing System</title>
     <script
       type="text/javascript"
       src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=paot70w1tj"
@@ -20,7 +20,7 @@
   </head>
   <body>
     <header>
-      <div class="container">
+      <div class="header-container">
         <h1><a href="main.html">Dememori</a></h1>
         <nav>
           <ul>
@@ -33,42 +33,84 @@
     </header>
 
     <section class="archive">
-      <div class="container2">
-        <!-- <h2>Archive</h2>
+      <!-- <div class="container1"> -->
+      <!-- <h2>Archive</h2>
         <p>Wildfire Warning System with Smart Devices</p> -->
 
-        <div class="sensor-grid">
-          <!-- Sensor 1 -->
-          <div class="sensor-card">
-            <!-- <div class="sensor-header">
+      <div class="sensor-grid">
+        <div class="map-card">
+          <!-- <div class="sensor-header">
                <span>⛰️</span>
               <span>황금산 </span>
               <div class="sensor-toggle">off</div> 
             </div> -->
-            <div class="map-container">
-              <div id="map"></div>
+          <div class="map-container">
+            <div id="map"></div>
+          </div>
+
+          <script>
+            var map1 = new naver.maps.Map("map", {
+              center: new naver.maps.LatLng(37.6017967, 127.162256),
+              zoom: 15,
+            });
+
+            var marker1 = new naver.maps.Marker({
+              position: new naver.maps.LatLng(37.6017967, 127.162256),
+              map: map1,
+            });
+          </script>
+        </div>
+        <!-- Sensor 1 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-hearder">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board1 방향 </span>
             </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor1-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor1-humidity">data</span>
+            </div>
+          </div>
+        </div>
 
-            <script>
-              var map1 = new naver.maps.Map("map", {
-                center: new naver.maps.LatLng(37.6017967, 127.162256),
-                zoom: 15,
-              });
+        <!-- Sensor 2 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-hearder">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board2 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor2-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor2-humidity">data</span>
+            </div>
+          </div>
+        </div>
 
-              var marker1 = new naver.maps.Marker({
-                position: new naver.maps.LatLng(37.6017967, 127.162256),
-                map: map1,
-              });
-            </script>
-
-            <!-- <div class="sensor-data">
-              <div class="sensor-temperature">
-                <span>🌡</span> <span id="sensor1-temp">data</span>
-              </div>
-              <div class="sensor-humidity">
-                <span>💧</span> <span id="sensor1-humidity">data</span>
-              </div>
-            </div> -->
+        <!-- Sensor 3 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-hearder">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board3 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor3-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor3-humidity">data</span>
+            </div>
           </div>
         </div>
       </div>
