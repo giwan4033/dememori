@@ -58,4 +58,11 @@ window.onload = function () {
   getLatestSensorData("Board1", "sensor1-temp", "sensor1-humidity");
   getLatestSensorData("Board2", "sensor2-temp", "sensor2-humidity");
   getLatestSensorData("Board3", "sensor3-temp", "sensor3-humidity");
+  getLatestSensorData("Board4", "sensor4-temp", "sensor4-humidity");
+  getLatestSensorData("Board5", "sensor5-temp", "sensor5-humidity");
+  getLatestSensorData("Board6", "sensor6-temp", "sensor6-humidity");
+  getLatestSensorData("Board7", "sensor7-temp", "sensor7-humidity");
+  getLatestSensorData("Board8", "sensor8-temp", "sensor8-humidity");
+  getLatestSensorData("Board9", "sensor9-temp", "sensor9-humidity");
+  getLatestSensorData("Board10", "sensor10-temp", "sensor10-humidity");
 };

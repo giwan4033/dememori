@@ -12,7 +12,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no"
     />
-    <title>Dememori - Wildfire Warniing System</title>
+    <title>Dememori - Wildfire Warning System</title>
     <script
       type="text/javascript"
       src="https://oapi.map.naver.com/openapi/v3/maps.js?ncpClientId=paot70w1tj"
@@ -32,38 +32,88 @@
       </div>
     </header>
 
-    <section class="archive">
-      <!-- <div class="container1"> -->
-      <!-- <h2>Archive</h2>
-        <p>Wildfire Warning System with Smart Devices</p> -->
-
-      <div class="sensor-grid">
-        <div class="map-card">
-          <!-- <div class="sensor-header">
-               <span>⛰️</span>
-              <span>황금산 </span>
-              <div class="sensor-toggle">off</div> 
-            </div> -->
-          <div class="map-container">
-            <div id="map"></div>
-          </div>
-
-          <script>
-            var map1 = new naver.maps.Map("map", {
-              center: new naver.maps.LatLng(37.6017967, 127.162256),
-              zoom: 15,
-            });
-
-            var marker1 = new naver.maps.Marker({
-              position: new naver.maps.LatLng(37.6017967, 127.162256),
-              map: map1,
-            });
-          </script>
+    <div class="layout-container">
+      <!-- 지도 카드 -->
+      <div class="map-card">
+        <div class="map-container">
+          <div id="map"></div>
         </div>
-        <!-- Sensor 1 -->
+        <script>
+          // 지도
+          var map1 = new naver.maps.Map("map", {
+            center: new naver.maps.LatLng(37.60281, 127.1658),
+            zoom: 15,
+          });
+
+          // 첫 번째 마커
+          var marker1 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.60425, 127.1692),
+            map: map1,
+          });
+
+          // 두 번째 마커
+          var marker2 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.6017967, 127.162256),
+            map: map1,
+          });
+
+          // 세 번째 마커
+          var marker3 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.60385, 127.163),
+            map: map1,
+          });
+
+          // 네 번째 마커
+          var marker4 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.60325, 127.1613),
+            map: map1,
+          });
+
+          // 다섯 번째 마커
+          var marker5 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.59825, 127.1648),
+            map: map1,
+          });
+
+          // 여섯 번째 마커
+          var marker6 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.59965, 127.163),
+            map: map1,
+          });
+
+          // 일곱 번째 마커
+          var marker7 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.6022, 127.1693),
+            map: map1,
+          });
+
+          // 여덟 번째 마커
+          var marker8 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.60457, 127.1705),
+            map: map1,
+          });
+
+          // 아홉 번째 마커
+          var marker9 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.6038, 127.166),
+            map: map1,
+          });
+
+          // 열 번째 마커
+          var marker10 = new naver.maps.Marker({
+            position: new naver.maps.LatLng(37.6025625, 127.16581821705),
+            map: map1,
+          });
+        </script>
+      </div>
+
+      <!-- 센서 그리드 -->
+      <div class="sensor-grid">
+        <!-- 센서 1부터 10까지 -->
+        <!-- 센서 1 -->
         <div class="sensor-card">
           <div class="sensor-data">
-            <div class="sensor-hearder">
+            <div class="sensor-header">
               <span class="sensor-icon">⛰️</span>
               <span class="sensor-title">Board1 방향 </span>
             </div>
@@ -77,11 +127,10 @@
             </div>
           </div>
         </div>
-
-        <!-- Sensor 2 -->
+        <!-- 센서 2 -->
         <div class="sensor-card">
           <div class="sensor-data">
-            <div class="sensor-hearder">
+            <div class="sensor-header">
               <span class="sensor-icon">⛰️</span>
               <span class="sensor-title">Board2 방향 </span>
             </div>
@@ -95,11 +144,10 @@
             </div>
           </div>
         </div>
-
-        <!-- Sensor 3 -->
+        <!-- 센서 3 -->
         <div class="sensor-card">
           <div class="sensor-data">
-            <div class="sensor-hearder">
+            <div class="sensor-header">
               <span class="sensor-icon">⛰️</span>
               <span class="sensor-title">Board3 방향 </span>
             </div>
@@ -113,9 +161,162 @@
             </div>
           </div>
         </div>
+        <!-- 센서 4 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-header">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board4 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor4-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor4-humidity">data</span>
+            </div>
+          </div>
+        </div>
+        <!-- 센서 5 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-header">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board5 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor5-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor5-humidity">data</span>
+            </div>
+          </div>
+        </div>
+        <!-- 센서 6 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-header">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board6 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor6-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor6-humidity">data</span>
+            </div>
+          </div>
+        </div>
+        <!-- 센서 7 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-header">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board7 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor7-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor7-humidity">data</span>
+            </div>
+          </div>
+        </div>
+        <!-- 센서 8 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-header">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board8 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor8-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor8-humidity">data</span>
+            </div>
+          </div>
+        </div>
+        <!-- 센서 9 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-header">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board9 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor9-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor9-humidity">data</span>
+            </div>
+          </div>
+        </div>
+        <!-- 센서 10 -->
+        <div class="sensor-card">
+          <div class="sensor-data">
+            <div class="sensor-header">
+              <span class="sensor-icon">⛰️</span>
+              <span class="sensor-title">Board10 방향 </span>
+            </div>
+          </div>
+          <div class="sensor-info">
+            <div class="sensor-temperature">
+              <span>🌡️</span> <span id="sensor10-temp">data</span>
+            </div>
+            <div class="sensor-humidity">
+              <span>💧</span> <span id="sensor10-humidity">data</span>
+            </div>
+          </div>
+        </div>
       </div>
-    </section>
+    </div>
 
+    <footer>
+      <div class="footer-container">
+        <div class="footer-section">
+          <h3>Dememori</h3>
+          <p>Real-time Wildfire Detection System for Safer Environments</p>
+        </div>
+        <div class="footer-section">
+          <h3>Contact Us</h3>
+          <p>
+            Email: <a href="mailto:dememori@gmail.com">contact@dememori.com</a>
+          </p>
+          <p>Phone: +82-10-1234-5678</p>
+        </div>
+        <div class="footer-section">
+          <h3>Follow Us</h3>
+          <ul class="social-icons">
+            <li>
+              <a href="#"><img src="img/kakao-talk.png" alt="Kakao" /></a>
+            </li>
+            <li>
+              <a href="#"><img src="img/instagram.png" alt="Instagram" /></a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/"
+                ><img src="img/youtube.png" alt="Youtube"
+              /></a>
+            </li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <p>© 2024 Dememori. All Rights Reserved.</p>
+        </div>
+      </div>
+    </footer>
     <script src="script.js"></script>
   </body>
 </html>
