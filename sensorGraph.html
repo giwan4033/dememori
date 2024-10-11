@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sensor Data Graph</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.0.0/firebase-database.js"></script>
+    <style>
+      canvas {
+        width: 100% !important;
+        height: auto !important;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Sensor Data (습도 및 온도)</h2>
+    <canvas id="sensorChart"></canvas>
+
+    <script>
+      // Firebase 구성 객체
+      const firebaseConfig = {
+        apiKey: "AIzaSyDo9P8Y1NANxSr79Gmj-ZyskLfZ_KtDBqU",
+        authDomain: "forestfireforecast.firebaseapp.com",
+        databaseURL: "https://forestfireforecast-default-rtdb.firebaseio.com",
+        projectId: "forestfireforecast",
+        storageBucket: "forestfireforecast.appspot.com",
+        messagingSenderId: "566032395610",
+        appId: "1:566032395610:web:835be202cae066a6221763",
+        measurementId: "G-RPDPN7ZZ69",
+      };
+
+      // Firebase 초기화
+      if (!firebase.apps.length) {
+        firebase.initializeApp(firebaseConfig);
+      } else {
+        firebase.app();
+      }
+
+      const database = firebase.database();
+
+      // URL에서 boardId를 받아옴
+      const urlParams = new URLSearchParams(window.location.search);
+      const boardId = urlParams.get("boardId");
+
+      // Chart.js 그래프 설정
+      const ctx = document.getElementById("sensorChart").getContext("2d");
+      const sensorChart = new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: Array.from({ length: 50 }, (_, i) => i), // X축 레이블 (0, 1, 2, ... 49)
+          datasets: [
+            {
+              label: "Humidity (습도)",
+              data: [], // 습도 데이터 초기값
+              borderColor: "blue",
+              borderWidth: 2,
+              fill: false,
+            },
+            {
+              label: "Temperature (온도)",
+              data: [], // 온도 데이터 초기값
+              borderColor: "red",
+              borderWidth: 2,
+              fill: false,
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: false,
+            },
+          },
+        },
+      });
+
+      // 실시간으로 데이터 가져오기
+      function updateGraph(boardId) {
+        const humidityRef = database
+          .ref(`sensor/${boardId}/humidity`)
+          .limitToLast(50);
+        const temperatureRef = database
+          .ref(`sensor/${boardId}/temperature`)
+          .limitToLast(50);
+
+        // 실시간으로 습도 데이터 가져오기
+        humidityRef.on("value", (snapshot) => {
+          const humidityData = snapshot.val()
+            ? Object.values(snapshot.val())
+            : [];
+          sensorChart.data.datasets[0].data = humidityData; // 습도 데이터 업데이트
+          sensorChart.update(); // 그래프 업데이트
+        });
+
+        // 실시간으로 온도 데이터 가져오기
+        temperatureRef.on("value", (snapshot) => {
+          const temperatureData = snapshot.val()
+            ? Object.values(snapshot.val())
+            : [];
+          sensorChart.data.datasets[1].data = temperatureData; // 온도 데이터 업데이트
+          sensorChart.update(); // 그래프 업데이트
+        });
+      }
+
+      // 페이지가 로드되면 해당 센서의 데이터로 그래프 업데이트
+      window.onload = function () {
+        updateGraph(boardId);
+      };
+    </script>
+  </body>
+</html>

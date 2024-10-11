@@ -150,6 +150,7 @@ nav ul li a {
 }
 
 .sensor-card {
+  cursor: pointer; /* 마우스를 올렸을 때 포인터 모양으로 변경 */
   background-color: #ffffff;
   border-radius: 10px;
   width: 90%; /* 그리드 셀에 맞게 채우기 */

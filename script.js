@@ -36,7 +36,7 @@ function getLatestSensorData(boardId, tempElementId, humidityElementId) {
     console.log(`Humidity Data (${boardId}):`, latestHumidityData); // 콘솔에 데이터 출력
     const latestHumidityValue = latestHumidityData
       ? Object.values(latestHumidityData)[0]
-      : "No Data";
+      : "- -";
     document.getElementById(humidityElementId).textContent =
       latestHumidityValue + "%";
   });
@@ -47,7 +47,7 @@ function getLatestSensorData(boardId, tempElementId, humidityElementId) {
     console.log(`Temperature Data (${boardId}):`, latestTemperatureData); // 콘솔에 데이터 출력
     const latestTemperatureValue = latestTemperatureData
       ? Object.values(latestTemperatureData)[0]
-      : "No Data";
+      : "- -";
     document.getElementById(tempElementId).textContent =
       latestTemperatureValue + "°C";
   });
@@ -66,3 +66,22 @@ window.onload = function () {
   getLatestSensorData("Board9", "sensor9-temp", "sensor9-humidity");
   getLatestSensorData("Board10", "sensor10-temp", "sensor10-humidity");
 };
+
+// 센서 카드 클릭 시 새 창 열기
+function openSensorDetails(boardId) {
+  // boardId를 쿼리 매개변수로 전달
+  window.open(
+    `sensorGraph.html?boardId=${boardId}`,
+    "_blank",
+    "width=800,height=600"
+  );
+}
+
+// URL 쿼리에서 boardId 추출
+const urlParams = new URLSearchParams(window.location.search);
+const boardId = urlParams.get("boardId");
+
+// 이후 boardId에 따라 데이터를 변경하는 로직을 추가할 수 있습니다.
+if (boardId === "Board1") {
+  // Board1의 데이터를 로드
+}
