@@ -15,16 +15,10 @@ body {
 
 .header-container {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: space-between; /* 헤더의 로고와 네비게이션을 양쪽 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
   padding: 0 20px;
 }
-
-/* .container {
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto;
-} */
 
 header {
   background-color: rgba(248, 248, 248, 0.8);
@@ -32,16 +26,27 @@ header {
   border-bottom: 1px solid #ddd;
 }
 
+/* h1 내부에 로고와 텍스트를 수평 정렬 */
 .header-container h1 {
-  display: inline-block;
+  display: flex; /* Flexbox로 로고와 텍스트를 한 줄에 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
   margin: 0;
+  font-family: "Linux Libertine", "Times New Roman", serif;
   font-size: 24px;
 }
 
+/* 로고 이미지 스타일 */
+.header-container h1 img {
+  width: 65px; /* 로고 크기 조정 */
+  height: auto; /* 원본 비율 유지 */
+  margin-right: 10px; /* 로고와 텍스트 사이 간격 */
+}
+
+/* 텍스트 스타일 */
 .header-container h1 a {
   text-decoration: none;
   color: #000;
-  margin-left: 20px;
+  margin-left: 0; /* 기존 마진 제거 */
 }
 
 nav ul {
@@ -61,53 +66,97 @@ nav ul li a {
   font-weight: bold;
 }
 
-/* .archive {
-  padding: 50px 0;
-  background-color: rgba(244, 244, 244, 0.8);
-  text-align: center;
-  min-height: 100vh;
-} */
+/* 상단 섹션의 레이아웃 설정 */
+.top-info-container {
+  display: flex;
+  justify-content: space-between; /* 좌우로 섹션 배치 */
+  align-items: center; /* 세로 중앙 정렬 */
+  background-color: rgba(248, 248, 248, 0.8);
+}
 
-/* .archive h2 {
-  font-size: 36px;
-  margin-bottom: 10px;
-} */
+.mountain-info {
+  display: flex; /* Flexbox로 아이콘과 텍스트를 한 줄에 배치 */
+  align-items: center; /* 수직 중앙 정렬 */
+  margin-left: 30px;
+}
 
-/* .archive p {
+.showing-icon {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.mountain-info h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.date-time-info {
   font-size: 16px;
-  color: #777;
-} */
+  font-weight: bold;
+  text-align: right;
+  margin-right: 50px;
+}
 
 /* 그리드 설정 */
 
 .sensor-header {
-  text-align: center;
-}
-
-.sensor-title {
-  font-size: 20px;
-  font-weight: bold;
-  margin-left: 10px;
-}
-
-.sensor-info {
   display: flex;
-  justify-content: space-around;
-  padding-top: 10px;
+  align-items: center; /* 수직 가운데 정렬 */
+  justify-content: center; /* 좌우 가운데 정렬 */
+  padding-bottom: 10px; /* 헤더 하단에 약간의 패딩 추가 */
+  position: relative; /* ::after 가상 요소를 사용하기 위한 설정 */
 }
 
-.sensor-icon {
-  font-size: 30px;
+.sensor-header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    rgba(204, 204, 204, 0),
+    #ccc,
+    rgba(204, 204, 204, 0)
+  ); /* 양 끝이 살짝 연한 선 */
 }
 
 .sensor-data {
   margin-top: 5px;
 }
 
+.mountain-icon {
+  width: 30px; /* 아이콘 크기를 조정 (원하는 크기로 변경 가능) */
+  height: 30px;
+  margin-right: 8px; /* 아이콘과 텍스트 사이에 약간의 여백 추가 */
+}
+
+.sensor-title {
+  font-size: 20px; /* 텍스트 크기 조정 */
+  font-weight: bold;
+}
+
+.sensor-info {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 7px;
+}
+
 .sensor-temperature,
 .sensor-humidity {
+  display: flex;
   align-items: center;
   font-size: 18px;
+}
+
+.temp-icon,
+.humi-icon {
+  width: 25px; /* 아이콘 크기를 조정 (원하는 크기로 변경 가능) */
+  height: 25px;
+  margin-right: 7px;
 }
 
 .sensor-temperature span,
@@ -120,7 +169,7 @@ nav ul li a {
   display: flex;
   justify-content: space-between;
   background-color: rgba(248, 248, 248, 0.8);
-  padding-top: 20px;
+  /* padding-top: 20px; */
   padding-bottom: 230px;
   width: 100%;
 }

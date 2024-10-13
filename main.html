@@ -22,7 +22,13 @@
   <body>
     <header>
       <div class="header-container">
-        <h1><a href="main.html">Dememori</a></h1>
+        <h1>
+          <img
+            src="img/dememori_Logo.png"
+            alt="Dememori Logo"
+            class="logo-icon"
+          /><a href="main.html">DEMEMORI</a>
+        </h1>
         <nav>
           <ul>
             <li><a href="#">Overview</a></li>
@@ -33,8 +39,24 @@
       </div>
     </header>
 
+    <div class="top-info-container">
+      <div class="mountain-info">
+        <img
+          src="img/showung_icon.png"
+          alt="Showing Icon"
+          class="showing-icon"
+        />
+        <h3>황금산 문화공원 | 경기 남양주시 지금동 719</h3>
+      </div>
+
+      <div class="date-time-info">
+        <h4 id="current-date-time">현재 날짜 / 시간</h4>
+      </div>
+    </div>
+
     <div class="layout-container">
       <!-- 지도 카드 -->
+
       <div class="map-card">
         <div class="map-container">
           <div id="map"></div>
@@ -109,187 +131,8 @@
       </div>
 
       <!-- 센서 그리드 -->
-      <div class="sensor-grid">
-        <!-- 센서 1부터 10까지 -->
-        <!-- 센서 1 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board1')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD1 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor1-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor1-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 2 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board2')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD2 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor2-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor2-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 3 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board3')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD3 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor3-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor3-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 4 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board4')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD4 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor4-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor4-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 5 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board5')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD5 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor5-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor5-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 6 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board6')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD6 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor6-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor6-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 7 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board7')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD7 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor7-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor7-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 8 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board8')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD8 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor8-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor8-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 9 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board9')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD9 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor9-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor9-humidity">data</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 센서 10 -->
-        <div class="sensor-card" onclick="openSensorDetails('Board10')">
-          <div class="sensor-data">
-            <div class="sensor-header">
-              <span class="sensor-icon">⛰️</span>
-              <span class="sensor-title">BOARD10 </span>
-            </div>
-          </div>
-          <div class="sensor-info">
-            <div class="sensor-temperature">
-              <span>🌡️</span> <span id="sensor10-temp">data</span>
-            </div>
-            <div class="sensor-humidity">
-              <span>💧</span> <span id="sensor10-humidity">data</span>
-            </div>
-          </div>
-        </div>
+      <div class="sensor-grid" id="sensor-grid">
+        <!-- JavaScript로 센서 카드가 생성됩니다 -->
       </div>
     </div>
 

@@ -53,19 +53,81 @@ function getLatestSensorData(boardId, tempElementId, humidityElementId) {
   });
 }
 
-// 페이지 로드 시 센서데이터를 가져오는 함수 호출
+function updateDateTime() {
+  const now = new Date();
+
+  // 월과 일을 가져오기
+  const formattedDate = now.toLocaleDateString("ko-KR", {
+    month: "long",
+    day: "numeric",
+  });
+
+  // 요일을 가져와서 괄호 안에 넣기
+  const daysOfWeek = ["일", "월", "화", "수", "목", "금", "토"];
+  const weekday = daysOfWeek[now.getDay()]; // getDay()는 0(일요일)부터 6(토요일)을 반환
+
+  // 시간 형식 설정 (예: 21:45:23)
+  const formattedTime = now.toLocaleTimeString("ko-KR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
+    hour12: false, // 24시간 형식
+  });
+
+  // 날짜와 시간을 한 줄로 조합하여 업데이트
+  document.getElementById(
+    "current-date-time"
+  ).innerText = `${formattedDate} (${weekday}) ${formattedTime}`;
+}
+
+// 페이지 로드 시 날짜 및 시간 업데이트
 window.onload = function () {
-  getLatestSensorData("Board1", "sensor1-temp", "sensor1-humidity");
-  getLatestSensorData("Board2", "sensor2-temp", "sensor2-humidity");
-  getLatestSensorData("Board3", "sensor3-temp", "sensor3-humidity");
-  getLatestSensorData("Board4", "sensor4-temp", "sensor4-humidity");
-  getLatestSensorData("Board5", "sensor5-temp", "sensor5-humidity");
-  getLatestSensorData("Board6", "sensor6-temp", "sensor6-humidity");
-  getLatestSensorData("Board7", "sensor7-temp", "sensor7-humidity");
-  getLatestSensorData("Board8", "sensor8-temp", "sensor8-humidity");
-  getLatestSensorData("Board9", "sensor9-temp", "sensor9-humidity");
-  getLatestSensorData("Board10", "sensor10-temp", "sensor10-humidity");
+  updateDateTime(); // 페이지 로드 시 즉시 업데이트
+  setInterval(updateDateTime, 1000); // 1초마다 시간 업데이트
 };
+
+// 센서 카드 생성 함수
+function createSensorCard(sensorId) {
+  return `
+    <div class="sensor-card" onclick="openSensorDetails('Board${sensorId}')">
+      <div class="sensor-data">
+        <div class="sensor-header">
+          <img src="img/mountain_icon.png" alt="Mountain Icon" class="mountain-icon" />
+          <span class="sensor-title">BOARD${sensorId} </span>
+        </div>
+      </div>
+      <div class="sensor-info">
+        <div class="sensor-temperature">
+          <img src="img/temp_icon.png" alt="Temp Icon" class="temp-icon" /> <span id="sensor${sensorId}-temp">- -</span>
+        </div>
+        <div class="sensor-humidity">
+          <img src="img/humi_icon.png" alt="humi Icon" class="humi-icon" /> <span id="sensor${sensorId}-humidity">- -</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// 센서 그리드를 동적으로 생성하는 함수
+function generateSensorGrid() {
+  const sensorGrid = document.getElementById("sensor-grid");
+  let sensorsHTML = "";
+  for (let i = 1; i <= 10; i++) {
+    sensorsHTML += createSensorCard(i);
+  }
+  sensorGrid.innerHTML = sensorsHTML;
+
+  // 센서 데이터 로드
+  loadSensorData();
+}
+
+// 실시간 센서 데이터를 로드하는 함수
+function loadSensorData() {
+  for (let i = 1; i <= 10; i++) {
+    const boardId = `Board${i}`;
+    getLatestSensorData(boardId, `sensor${i}-temp`, `sensor${i}-humidity`);
+  }
+}
 
 // 센서 카드 클릭 시 새 창 열기
 function openSensorDetails(boardId) {
@@ -85,3 +147,10 @@ const boardId = urlParams.get("boardId");
 if (boardId === "Board1") {
   // Board1의 데이터를 로드
 }
+
+// 페이지 로드 시 센서 카드 및 날짜 시간 업데이트
+window.onload = function () {
+  updateDateTime(); // 날짜 및 시간 업데이트
+  setInterval(updateDateTime, 1000); // 1초마다 시간 업데이트
+  generateSensorGrid(); // 센서 카드 생성 후 데이터를 로드
+};
