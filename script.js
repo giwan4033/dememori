@@ -33,26 +33,35 @@ function getLatestSensorData(boardId, tempElementId, humidityElementId) {
   // 최신 humidity 값 가져오기
   humidityRef.on("value", (snapshot) => {
     const latestHumidityData = snapshot.val();
-    console.log(`Humidity Data (${boardId}):`, latestHumidityData); // 콘솔에 데이터 출력
     const latestHumidityValue = latestHumidityData
       ? Object.values(latestHumidityData)[0]
       : "- -";
     document.getElementById(humidityElementId).textContent =
       latestHumidityValue + "%";
+
+    // 습도가 45% 이하일 때 경고 메시지 표시
+    if (latestHumidityValue !== "- -" && latestHumidityValue <= 45) {
+      alert(`경고: 습도가 ${latestHumidityValue}%로 매우 낮습니다!`);
+    }
   });
 
   // 최신 temperature 값 가져오기
   temperatureRef.on("value", (snapshot) => {
     const latestTemperatureData = snapshot.val();
-    console.log(`Temperature Data (${boardId}):`, latestTemperatureData); // 콘솔에 데이터 출력
     const latestTemperatureValue = latestTemperatureData
       ? Object.values(latestTemperatureData)[0]
       : "- -";
     document.getElementById(tempElementId).textContent =
       latestTemperatureValue + "°C";
+
+    // 온도가 35도 이상일 때 경고 메시지 표시
+    if (latestTemperatureValue !== "- -" && latestTemperatureValue >= 30) {
+      alert(`경고: 온도가 ${latestTemperatureValue}°C로 매우 높습니다!`);
+    }
   });
 }
 
+// 날짜와 시간 업데이트 함수
 function updateDateTime() {
   const now = new Date();
 
@@ -80,12 +89,6 @@ function updateDateTime() {
   ).innerText = `${formattedDate} (${weekday}) ${formattedTime}`;
 }
 
-// 페이지 로드 시 날짜 및 시간 업데이트
-window.onload = function () {
-  updateDateTime(); // 페이지 로드 시 즉시 업데이트
-  setInterval(updateDateTime, 1000); // 1초마다 시간 업데이트
-};
-
 // 센서 카드 생성 함수
 function createSensorCard(sensorId) {
   return `
@@ -93,7 +96,7 @@ function createSensorCard(sensorId) {
       <div class="sensor-data">
         <div class="sensor-header">
           <img src="img/mountain_icon.png" alt="Mountain Icon" class="mountain-icon" />
-          <span class="sensor-title">BOARD${sensorId} </span>
+          <span class="sensor-title">SENSOR${sensorId} </span>
         </div>
       </div>
       <div class="sensor-info">
@@ -142,11 +145,6 @@ function openSensorDetails(boardId) {
 // URL 쿼리에서 boardId 추출
 const urlParams = new URLSearchParams(window.location.search);
 const boardId = urlParams.get("boardId");
-
-// 이후 boardId에 따라 데이터를 변경하는 로직을 추가할 수 있습니다.
-if (boardId === "Board1") {
-  // Board1의 데이터를 로드
-}
 
 // 페이지 로드 시 센서 카드 및 날짜 시간 업데이트
 window.onload = function () {
